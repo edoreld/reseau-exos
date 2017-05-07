@@ -1,0 +1,27 @@
+##################################################################
+Commentaires pour le pair CnxlsOrdntdScktSrvc.c & 3. CnxlsOrdntdScktClnt.c
+##################################################################
+
+=> La partie client du programme original avait une variable non définie appellée : NETDB_MAX_HOST_NAME_LENGTH. Je l'ai défini manuellement.
+
+######################
+## Partie Serveur : ##
+######################
+C'est un programme qui lancer un serveur.
+
+On récupére un socket qui utilise la famille de socket AF_INET (ipv4) et avec le protocole SOCK_DGRAM (UDP).
+
+On le associe avec le port 3555 et n'importe laquelle adresse ip avec bind.
+
+Après, on attends à recevoir quelque chose depuis le socket descriptor avec recv et on met les infos du client dans le struct clientaddr. On va imprimer quelques infos du client après et on va envoyer les infos qu'on a reçu au client par le socket.
+
+
+######################
+## Partie Client : ##
+######################
+
+On récupére un socket qui utilise la famille de socket AF_INET (ipv4) et avec le protocole SOCK_DGRAM (UDP).
+
+On le associe avec le port 3555 et l'addresse du serveur. Si on a le nom du serveur, alors on récupere l'adresse IP.
+
+On envoye le string "A CLIENT REQUEST" vers le socket et en suite on attends à recevoir quelque chose depuis le socket.

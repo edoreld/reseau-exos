@@ -1,0 +1,29 @@
+##################################################################
+Commentaires pour le pair CnxlsOrdntdScktSrvc.c & 3. CnxlsOrdntdScktClnt.c
+##################################################################
+
+=> La partie client du programme original avait une variable non définie appellée : NETDB_MAX_HOST_NAME_LENGTH. Je l'ai défini manuellement.
+
+######################
+## Partie Serveur : ##
+######################
+
+On ouvre un socket (ipv4, tcp).
+
+On active l'option SO_REUSEADDR (ça nous permet de réutiliser une adresse locale)
+
+On donne un nom au socket avec bind avec quelques options. On dit que on veut écouter des connexions sur le socket et en suite on accepte les connexions entrantes.
+
+On utilise la fonction accept pour accepter une requête de connexion entrante.
+
+On appelle select pour dire d'attendre un évenement et de se réveiller lors de cet évenement.
+
+On appelle setsockopt pour dire que notre socket devrait recevoir un minimum de 250 bytes.
+
+On récois les infos et on les envoie de retour au client.
+
+######################
+## Partie Client : ##
+######################
+
+On crée un socket TCP, ipv4. On se connecte au socket avec les infos du serveur et on envoie 250 bytes d'info. En suite, sachant que le serveur va envoyer 250 bytes d'info, on se prepare à le recevoir.

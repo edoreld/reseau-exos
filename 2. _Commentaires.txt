@@ -1,0 +1,35 @@
+##################################################################
+Commentaires pour le pair CnxAFNXScktSrvc.c & CnxlsOrntdScktClnt.c
+##################################################################
+
+ => Remarque : Le programme donné manquait l'instruction recv pour recevoir les infos du client. J'ai trouvé
+ le programme original sur https://www.ibm.com/support/knowledgecenter/ssw_ibm_i_71/rzab6/xafunixsrv.htm. Pour la suite de l'exercise, je me base sur ce programme.
+
+######################
+## Partie Serveur : ##
+######################
+C'est un programme qui lancer un serveur.
+
+On récupére un socket qui utilise la famille de socket AF_UNIX. Cette famille permet la communication efficiente entre les processus d'un même système. Il utilise aussi le type SOCK_STREAM correspondant aux connexions TCP.
+
+Après, on appelle bind pour associer le chemin /tmp/server au socket. Donc, le socket va utiliser ce fichier.
+
+En suite, on utilise listen pour écouter les connexions entrantes. Le deuxième paramètre limite le nombre de requêtes de connexions.
+
+On appelle setsockopt pour dire que notre socket devrait recevoir un minimum de 250 bytes.
+
+On utilise recv pour recevoir le 250 bytes depuis le client. On envoie en suite avec send les infos de retour au socket.
+
+######################
+## Partie Client : ##
+######################
+
+On crée un socket avec le protocole TCP et en utilisant AF_UNIX (famille de sockets facilitant la communication efficiente entre processus). En suite, on met dans le champ sun_path the le struct serveraddr le chemin du serveur.
+
+On se connecte (avec connect) au socket dans /tmp/server. On envoie une chaîne de 250 lettres 'a' (250 bytes) dans le socket.
+
+On récois de bytes (ce le server qui va les envoyer) jusqu'à qu'on a 250.
+
+
+
+
