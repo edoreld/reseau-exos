@@ -1,0 +1,6 @@
+Si on utilise  "popen("sort | uniq | more", "w")" dans le premier programme, alors il va passe l'array de char* par ce tuyau. Dans l'output va être ordonne, filtre (il n'aura que des lignes uniques), et après on va pouvoir regarder la sortie avec more.
+
+Si on utilise 'popen("sort > /tmp/fooBar", "w")', alors la sortie ordonnée d'array va être mis dans le fichier fooBar sous le directoire /tmp.
+
+Dans le deuxième programme, si on utilise 'popen("ls -scottb", "r") au lieu de 'popen("ls", "r")', alors on va lire la sortie
+de la commande ls avec les paramètres -scottb au lieu de la commande ls sans paramètres.
